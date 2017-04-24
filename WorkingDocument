@@ -1,0 +1,17 @@
+game_rows = 10
+game_columns = 10
+game_board = [game_rows, game_columns]
+
+class Cell
+  def initialize (status, row, col)
+    @initial_status = status
+    @row = row
+    @col = col
+  end
+
+  def count_neighbors_middle
+    if row != 1 && row != game_rows && col != 1 && col != game_columns
+
+    end
+  end
+end
