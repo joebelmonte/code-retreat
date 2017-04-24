@@ -1,19 +1,60 @@
-# game_rows = Array.new(10)
-# game_columns = Array.new(10)
-# game_board = [game_rows, game_columns]
-game_board = Array.new(10) {Array.new(10,0)}
-
+game_rows = 10
+game_columns = 10
+game_board = Array.new(game_rows) {Array.new(game_columns,0)}
 
 class Cell
   def initialize (status, row, col)
     @initial_status = status
     @row = row
     @col = col
+    @living_neighbors = ""
+    @final_status = ""
   end
+
+  # def check_top (row, column)
+  #   row += 1
+  #   result = game_board[row][column]
+  #   return result
+  # end
+  # def check_bottom (row, column)
+  #   row -= 1
+  #   result = game_board[row][column]
+  #   return result #just finishing my thought - essentially this does the same as below in a method
+  # end
 
   def count_neighbors_middle
-    if row != 1 && row != game_rows && col != 1 && col != game_columns
-
+    if row != 0 && row != game_rows && col != 0 && col != game_columns
+      living_neighbors = game_board[row][col-1] + game_board[row][col+1] + game_board[row-1][col] + game_board[row-1][col-1] + game_board[row-1][col+1] + game_board[row+1][col] + game_board[row+1][col-1] + game_board[row+1][col+1]
     end
   end
+  def count_neighbors_lower_left_corner
+    if row == 0 && col == 0
+      living_neighbors =  game_board[row][col+1] + game_board[row+1][col] + game_board[row+1][col+1]
+    end
+  end
+  def count_neighbors_top_left_corner
+    if row = game_rows && col = 0
+    living_neighbors =  game_board[row][col-1] + game_board[row-1][col] + game_board[row-1][col-1]
+  end
+  end
+  def count_neighbors_bottom_left_corner
+    if col = 0 && row == 0
+    living_neighbors =  game_board[row][col+1] + game_board[row+1][col] + game_board[row+1][col+1]
+  end
+  end
+  def count_neighbors_bottom_right_corner
+    living_neighbors =  game_board[row][col-1] + game_board[row+1][col] + game_board[row-1][col-1]
+  end
+    def kill
+      if initial_status = 1 && living_neighbors < 2 || living_neighbors>3
+        final_status = 0
+      end
+    end
+
+    def resurrrect
+      if initial_status = 0 && living_neighbors = 3
+        final_status = 1
+      end
+    end
+
 end
