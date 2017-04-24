@@ -1,6 +1,8 @@
-game_rows = 10
-game_columns = 10
-game_board = [game_rows, game_columns]
+# game_rows = Array.new(10)
+# game_columns = Array.new(10)
+# game_board = [game_rows, game_columns]
+game_board = Array.new(10) {Array.new(10,0)}
+
 
 class Cell
   def initialize (status, row, col)
